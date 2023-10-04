@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -26,7 +25,10 @@ function LoginPage() {
     );
     console.log(user);
     if (user) {
-      navigate("/movies");
+      toast.success("Logged in Successfully");
+      setTimeout(() => {
+        navigate("/movies");
+      }, 1000);
     } else {
       toast.error("Invalid Credentials");
     }

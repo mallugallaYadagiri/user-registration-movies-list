@@ -3,7 +3,6 @@ import LoginPage from "./components/LoginPage";
 import CompanyInfoPage from "./components/CompanyInfoPage";
 import MoviesListPage from "./components/MoviesListPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainPage from "./components/MainPage.jsx";
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/movies" element={<MoviesListPage />} />
           <Route path="/company" element={<CompanyInfoPage />} />
-          <Route path="/mainpage" element={<MainPage />} />
         </Routes>
       </div>
     </BrowserRouter>

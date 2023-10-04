@@ -34,7 +34,7 @@ function MoviesListPage() {
       }
     };
     fetchData();
-  }, [moviesData]);
+  }, []);
 
   function formatDate(timestamp) {
     const date = new Date(timestamp * 1000);
@@ -42,12 +42,32 @@ function MoviesListPage() {
     date.setMinutes(date.getMinutes() + 30);
 
     const day = date.getDate();
-    const month = date.toLocaleString("en-US", { month: "short" });
+    const month = date.toLocaleString("en-IN", { month: "short" });
 
     const formattedDay = day < 10 ? `0${day}` : day;
 
     return `${formattedDay} ${month}`;
   }
+
+  const handleUpVote = (id) => {
+    const updatedMoviesData = moviesData.map((movie) => {
+      if (movie._id === id) {
+        movie.totalVoted++;
+      }
+      return movie;
+    });
+    setMoviesData(updatedMoviesData);
+  };
+
+  const handleDownVote = (id) => {
+    const updatedMoviesData = moviesData.map((movie) => {
+      if (movie._id === id && movie.totalVoted > 0) {
+        movie.totalVoted--;
+      }
+      return movie;
+    });
+    setMoviesData(updatedMoviesData);
+  };
 
   return (
     <div className="h-full">
@@ -63,11 +83,21 @@ function MoviesListPage() {
             >
               <div className="flex justify-center items-center ">
                 <div className="m-2 flex flex-col p-4">
-                  <BiSolidUpArrow size={40} color="gray" />
+                  <BiSolidUpArrow
+                    size={40}
+                    color="gray"
+                    onClick={() => handleUpVote(movie._id)}
+                    className="cursor-pointer"
+                  />
                   <p className="text-center text-2xl font-bold">
                     {movie.totalVoted}
                   </p>
-                  <BiSolidDownArrow size={40} color="gray" />
+                  <BiSolidDownArrow
+                    size={40}
+                    color="gray"
+                    onClick={() => handleDownVote(movie._id)}
+                    className="cursor-pointer"
+                  />
                   <p>Votes</p>
                 </div>
                 <div className="m-2">
@@ -90,7 +120,7 @@ function MoviesListPage() {
                   <div className="flex items-center ">
                     <p className="text-xl font-bold p-2">
                       {movie.runTime} Mins
-                    </p>{" "}
+                    </p>
                     |<p className="text-xl font-bold p-2">{movie.language}</p> |
                     <p className="text-xl font-bold p-2">
                       {formatDate(movie.releasedDate)}
@@ -108,7 +138,7 @@ function MoviesListPage() {
                 </div>
               </div>
               <div className="flex flex-col p-2">
-                <button className="bg-blue-500 p-4 rounded-md text-white font-bold text-xl">
+                <button className="bg-blue-500 p-4 rounded-md text-white font-bold text-xl ">
                   Watch Trailer
                 </button>
               </div>

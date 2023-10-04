@@ -6,7 +6,7 @@ function CompanyInfoPage() {
     <div className="h-screen ">
       <NavBar />
       <h1 className="text-center text-3xl text-white font-bold mt-10 ">
-        Company Info{" "}
+        Company Info
       </h1>
       <div className="border w-1/3 m-auto flex flex-col justify-between bg-blue-500 rounded-lg mt-20">
         <p className="text-xl text-white font-bold flex justify-between p-4">
